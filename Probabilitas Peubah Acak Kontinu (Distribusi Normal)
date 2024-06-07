@@ -1,0 +1,145 @@
+> x=rnorm(100, 0, 1)
+> View(x)
+> hist(x)
+> pnorm(160,165, 6)
+[1] 0.2023284
+Warning messages:
+1: In doTryCatch(return(expr), name, parentenv, handler) :
+  display list redraw incomplete
+2: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+3: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+4: In doTryCatch(return(expr), name, parentenv, handler) :
+  display list redraw incomplete
+5: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+6: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+7: In doTryCatch(return(expr), name, parentenv, handler) :
+  display list redraw incomplete
+8: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+9: In doTryCatch(return(expr), name, parentenv, handler) :
+  invalid graphics state
+> 1-pnorm(180,165,6)
+[1] 0.006209665
+> pnorm(180, 165,6)- pnorm(160,165,6)
+[1] 0.791462
+> dbinom(2,5,0791462)
+[1] NaN
+Warning message:
+In dbinom(2, 5, 791462) : NaNs produced
+> dbinom(2, 5, 0.791462)
+[1] 0.05680882
+> # Menggunakan pnorm dengan lower.tail=FALSE untuk mendapatkan probabilitas komplementer
+> prob1 <- pnorm(84, mean = 72, sd = 15.2, lower.tail = FALSE)
+> 
+> # Menggunakan 1 - pnorm untuk mendapatkan probabilitas komplementer
+> prob2 <- 1 - pnorm(84, mean = 72, sd = 15.2)
+> 
+> # Menampilkan hasil
+> prob1
+[1] 0.2149176
+> prob2
+[1] 0.2149176
+> 
+> 1-pnorm(84,72,15.2)
+[1] 0.2149176
+> # Menghasilkan 1000 data yang berdistribusi normal dengan mean 165 dan sd 15
+> data <- rnorm(1000, mean = 165, sd = 15)
+> 
+> # Melihat ringkasan data
+> summary(data)
+   Min. 1st Qu.  Median    Mean 
+  110.5   154.4   164.5   164.7 
+3rd Qu.    Max. 
+  174.3   216.4 
+> 
+> # Membuat histogram dari data
+> hist(data, main = "Histogram of Generated Data", xlab = "Height (cm)", ylab = "Frequency", col = "lightblue")
+> 
+> # Menghasilkan 1000 data yang berdistribusi normal dengan mean 3.12 dan sd 0.25
+> data_ipk <- rnorm(1000, mean = 3.12, sd = 0.25)
+> 
+> # Melihat ringkasan data
+> summary(data_ipk)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.264   2.960   3.131   3.134   3.305   3.927 
+> 
+> # Membuat histogram dari data
+> hist(data_ipk, main = "Histogram of Generated IPK Data", xlab = "IPK", ylab = "Frequency", col = "lightred")
+Error in rect(x$breaks[-nB], 0, x$breaks[-1L], y, col = col, border = border,  : 
+  invalid color name 'lightred'
+> # Menghasilkan 1000 data yang berdistribusi normal dengan mean 3.12 dan sd 0.25
+> data_ipk <- rnorm(1000, mean = 3.12, sd = 0.25)
+> 
+> # Melihat ringkasan data
+> summary(data_ipk)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.345   2.947   3.121   3.119   3.289   3.865 
+> 
+> # Membuat histogram dari data
+> hist(data_ipk, main = "Histogram of Generated IPK Data", xlab = "IPK", ylab = "Frequency", col = "red")
+> 
+> # Menghitung peluang bahwa tinggi kurang dari 150 cm
+> mean_height <- 165
+> sd_height <- 6
+> height_threshold <- 150
+> 
+> probability <- pnorm(height_threshold, mean = mean_height, sd = sd_height)
+> probability
+[1] 0.006209665
+> 
+> # Menghitung peluang bahwa tinggi lebih dari 170 cm
+> mean_height <- 165
+> sd_height <- 6
+> height_threshold <- 170
+> 
+> probability <- pnorm(height_threshold, mean = mean_height, sd = sd_height, lower.tail = FALSE)
+> probability
+[1] 0.2023284
+> 
+> # Langkah 1: Menghitung peluang tinggi seorang mahasiswa antara 150 cm dan 180 cm
+> mean_height <- 165
+> sd_height <- 6
+> lower_bound <- 150
+> upper_bound <- 180
+> 
+> # Peluang tinggi antara 150 cm dan 180 cm
+> probability_within_range <- pnorm(upper_bound, mean = mean_height, sd = sd_height) - pnorm(lower_bound, mean = mean_height, sd = sd_height)
+> 
+> # Menampilkan peluang tinggi antara 150 cm dan 180 cm
+> print(paste("Probability of height between 150 cm and 180 cm:", probability_within_range))
+[1] "Probability of height between 150 cm and 180 cm: 0.987580669348448"
+> 
+> # Langkah 2: Menghitung peluang terdapat 2 mahasiswa atau kurang dengan tinggi tersebut
+> n_students <- 7
+> p_within_range <- probability_within_range
+> 
+> # Peluang terdapat 2 mahasiswa atau kurang dengan tinggi antara 150 cm dan 180 cm
+> probability_2_or_less <- pbinom(2, size = n_students, prob = p_within_range)
+> 
+> # Menampilkan hasil
+> print(paste("Probability of having 2 students or less with height between 150 cm and 180 cm:", probability_2_or_less))
+[1] "Probability of having 2 students or less with height between 150 cm and 180 cm: 6.07680567517015e-09"
+> 
+> # Menghitung peluang waktu perjalanan antara 125 menit dan 158 menit
+> mean_travel_time <- 175
+> sd_travel_time <- 30
+> lower_bound <- 125
+> upper_bound <- 158
+> 
+> # Peluang waktu perjalanan antara 125 menit dan 158 menit
+> probability_within_range <- pnorm(upper_bound, mean = mean_travel_time, sd = sd_travel_time) - pnorm(lower_bound, mean = mean_travel_time, sd = sd_travel_time)
+> probability_within_range
+[1] 0.23768
+> 
+> # Menghitung peluang waktu perjalanan lebih dari 150 menit
+> mean_travel_time <- 175
+> sd_travel_time <- 30
+> threshold_time <- 150
+> 
+> probability <- pnorm(threshold_time, mean = mean_travel_time, sd = sd_travel_time, lower.tail = FALSE)
+> print(probability)
+[1] 0.7976716
